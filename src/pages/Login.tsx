@@ -1,9 +1,9 @@
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useIonRouter } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import './Login.css';
 
-function Home() {
+function Login() {
   const router = useIonRouter();
 
   const doLogin = function () {
@@ -29,4 +29,4 @@ function Home() {
 
 }
 
-export default Home;
+export default Login;
