@@ -1,72 +1,27 @@
-import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
-import React, { useState, useRef } from 'react';
-import {
-  IonButtons,
-  IonButton,
-  IonModal,
-  IonItem,
-  IonInput,
-} from '@ionic/react';
-
-import { OverlayEventDetail } from '@ionic/core/components';
-
 const Home: React.FC = () => {
-  const [message, setMessage] = useState('');
-  const modal = useRef<HTMLIonModalElement>(null);
-  const input = useRef<HTMLIonInputElement>(null);
-
-  const onWillDismiss = (event: CustomEvent<OverlayEventDetail>) => {
-    const { data } = event.detail;
-    if (data) {
-      setMessage(`Hello, ${data}!`);
-    }
-  };
-
-
   return (
-     <IonPage>
+    <IonPage>
       <IonHeader>
         <IonToolbar>
-           <IonButtons>
-                    <IonMenuButton>
+          
+          <IonButtons slot="start">
+            <IonMenuButton></IonMenuButton>
+          </IonButtons>
 
-                    </IonMenuButton>
-                </IonButtons>
+          <IonTitle>Blank</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonButton id="open-modal" expand="block">
-          abriha ko
-        </IonButton>
-        <p>{message}</p>
-        <IonModal ref={modal} trigger="open-modal" onWillDismiss={(event) => onWillDismiss(event)}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Welcome user</IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={() => 'ok'}>
-                  ok
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonInput
-                label="Enter your name"
-                labelPlacement="stacked"
-                ref={input}
-                type="text"
-                placeholder="imong ngalan"
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">Blank</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <ExploreContainer />
       </IonContent>
     </IonPage>
   );

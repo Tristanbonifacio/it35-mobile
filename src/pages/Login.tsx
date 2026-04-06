@@ -1,28 +1,24 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter }from'@ionic/react';
 
-const Login: React.FC = () => {
- const navigation = useIonRouter();
-
-      const doLogin = () => {
-    navigation.push('/app', 'forward', 'replace')
- }
-   return(
+const Login: React.FC =()=>{
+  const navigation = useIonRouter();
+  const doLogin = ()=>{
+    navigation.push('/app','forward', 'replace');
+  }
+  return(
     <IonPage>
         <IonHeader>
-            <IonToolbar>
-                <IonTitle>Login </IonTitle>
-            </IonToolbar>
+          <IonToolbar>
+            <IonTitle>Login</IonTitle>
+          </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen >
-            <IonButton expand= "full" onClick={() => doLogin ()}>
-                Login
+        <IonContent className="Ion-Padding">
+            <IonButton expand="full" onClick={()=>doLogin()}>
+              Login
             </IonButton>
-
         </IonContent>
     </IonPage>
-
-   );
-
-}   
-
+    
+  );
+};
 export default Login;

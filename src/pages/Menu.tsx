@@ -1,75 +1,57 @@
-import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
+import { IonContent, IonHeader, IonItem, IonMenu, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar, IonIcon, IonMenuToggle } from '@ionic/react';
+import Home from './Home';
+import { Redirect, Route } from 'react-router';
+import { homeOutline, informationOutline, settingsOutline } from 'ionicons/icons'
+import Page1 from './page1';
+import Page2 from './page2';
 
-import React, { useState, useRef } from 'react';
-import {
-  IonButtons,
-  IonButton,
-  IonModal,
-  IonItem,
-  IonInput,
-} from '@ionic/react';
+const Menu: React.FC =()=>{
 
-import { OverlayEventDetail } from '@ionic/core/components';
+  const path = [
+    {name:'Home', url:"/app/home",icon:homeOutline},
+    {name:'Page1', url:"/app/page1",icon:settingsOutline},
+    {name:'Page2', url:"/app/page2",icon:informationOutline}
+  ]
 
-const Home: React.FC = () => {
-  const [message, setMessage] = useState('');
-  const modal = useRef<HTMLIonModalElement>(null);
-  const input = useRef<HTMLIonInputElement>(null);
-
-  const onWillDismiss = (event: CustomEvent<OverlayEventDetail>) => {
-    const { data } = event.detail;
-    if (data) {
-      setMessage(`Hello, ${data}!`);
-    }
-  };
+  return(
+    <IonPage>
+        <IonSplitPane contentId="main">
+           <IonMenu contentId="main">
 
 
-  return (
-     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-           <IonButtons>
-                    <IonMenuButton>
+              <IonHeader>
+                <IonToolbar>
+                  <IonTitle>Menu</IonTitle>
+                </IonToolbar>
+              </IonHeader>
 
-                    </IonMenuButton>
-                </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonButton id="open-modal" expand="block">
-          abriha ko
-        </IonButton>
-        <p>{message}</p>
-        <IonModal ref={modal} trigger="open-modal" onWillDismiss={(event) => onWillDismiss(event)}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Welcome user</IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={() => 'ok'}>
-                  ok
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonInput
-                label="Enter your name"
-                labelPlacement="stacked"
-                ref={input}
-                type="text"
-                placeholder="imong ngalan"
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
-      </IonContent>
-    </IonPage>
+              <IonContent>
+
+                {path.map((item, index) => (
+                  <IonMenuToggle key={index}>
+                    <IonItem routerLink={item.url} routerDirection="forward">
+                      <IonIcon icon={item.icon} slot="start"></IonIcon>
+                      {item.name}
+                    </IonItem>
+                  </IonMenuToggle>
+                ))}
+
+              </IonContent>
+
+           </IonMenu>
+
+           <IonRouterOutlet id="main">
+             <Route exact path="/app/home" component={Home}/>
+             <Route exact path="/app">
+                <Redirect to="/app/home"/>
+             </Route>
+
+             <Route exact path="/app/Page1" component={Page1}/>
+             <Route exact path="/app/Page2" component={Page2}/>
+           </IonRouterOutlet>
+
+        </IonSplitPane>
+    </IonPage>    
   );
 };
-
-export default Home;
+export default Menu;
