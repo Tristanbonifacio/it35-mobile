@@ -1,6 +1,7 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
-const Favorites: React.FC = () => {
+
+const About: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -8,7 +9,7 @@ const Favorites: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Favorites</IonTitle>
+          <IonTitle>about Us</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -22,4 +23,4 @@ const Favorites: React.FC = () => {
   );
 };
 
-export default Favorites;
+export default About;

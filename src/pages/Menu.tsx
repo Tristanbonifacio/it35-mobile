@@ -1,62 +1,53 @@
-import { IonContent, IonHeader, IonItem, IonMenu, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar, IonIcon, IonMenuToggle, IonButton } from '@ionic/react';
-import Home from './Home';
-import { Redirect, Route } from 'react-router';
-import { homeOutline, informationOutline, logOutOutline, settingsOutline } from 'ionicons/icons'
-import Page1 from './page1';
-import Page2 from './page2';
-
-const Menu: React.FC =()=>{
-
-  const path = [
-    {name:'Home', url:"/app/home",icon:homeOutline},
-    {name:'Page1', url:"/app/page1",icon:settingsOutline},
-    {name:'Page2', url:"/app/page2",icon:informationOutline}
-  ]
-
-  return(
-    <IonPage>
-        <IonSplitPane contentId="main">
-           <IonMenu contentId="main">
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonTitle, IonToolbar, } from "@ionic/react"
+import { homeOutline, informationCircleOutline, logOutOutline } from "ionicons/icons"
+import { Redirect, Route } from "react-router-dom"
+import Home from "./Home"
+import About from "./about"
 
 
-              <IonHeader>
-                <IonToolbar>
-                  <IonTitle>Menu</IonTitle>
-                </IonToolbar>
-              </IonHeader>
+const Menu: React.FC = () => {
+    const path = [
+        { name: 'Home', url: '/app/home', icon: homeOutline },
+        { name: 'About', url: '/app/about', icon: informationCircleOutline }
 
-              <IonContent>
+    ];
+    return (
+        <IonPage>
+            <IonMenu contentId="main" type="overlay">
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle>Menu</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
 
-                {path.map((item, index) => (
-                  <IonMenuToggle key={index}>
-                    <IonItem routerLink={item.url} routerDirection="forward">
-                      <IonIcon icon={item.icon} slot="start"></IonIcon>
-                      {item.name}
-                    </IonItem>
-                  </IonMenuToggle>
-                ))}
+                <IonContent>
 
-                <IonButton expand='full' routerLink='/'>
-                  <IonIcon icon={logOutOutline} slot='start'></IonIcon>
-                  logout
-                </IonButton>
+                    {path.map((item, index) => (
+                        <IonMenuToggle key={index}>
+                            <IonItem routerLink={item.url} routerDirection="forward">
+                                <IonIcon icon={item.icon}
+                                    slot="start"></IonIcon>
+                                {item.name}
+                            </IonItem>
+                        </IonMenuToggle>
+                    ))}
 
-              </IonContent>
+                    <IonButton routerLink="/" routerDirection="back" expand="full">
+                        <IonIcon icon={logOutOutline} slot="start"></IonIcon>
+                        Logout
+                    </IonButton>
+                </IonContent>
+            </IonMenu>
+            <IonRouterOutlet id="main">
+                <Route exact path="/app/home" component={Home} />
+                <Route exact path="/app">
+                    <Redirect to="/app/home" />
+                </Route>
+                <Route exact path="/app/about" component={About} />
+            </IonRouterOutlet>
+        </IonPage>
 
-           </IonMenu>
-
-           <IonRouterOutlet id="main">
-             <Route exact path="/app/home" component={Home}/>
-             <Route exact path="/app">
-                <Redirect to="/app/home"/>
-             </Route>
-
-             <Route exact path="/app/Page1" component={Page1}/>
-             <Route exact path="/app/Page2" component={Page2}/>
-           </IonRouterOutlet>
-
-        </IonSplitPane>
-    </IonPage>    
-  );
+    );
 };
+
 export default Menu;
